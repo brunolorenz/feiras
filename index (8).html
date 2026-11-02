@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feiras · Uns Predinhos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;600&family=Lora:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+:root{--fundo:#BEF264;--parede:#FFF1B8;--tinta:#111;--azul:#7C5CF0;--sol:#FFD93B;--mudo:#3B4A24;--verde:#5FBF3E}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:400 15px/1.5 'DM Sans',sans-serif;color:var(--tinta);background:var(--fundo);max-width:560px;margin:0 auto;padding:0 12px 48px}
+button,input{font:inherit;color:inherit}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
+.topo{padding:18px 4px 6px}
+.marca{font-size:14px;font-weight:600}
+.marca a{color:var(--tinta);text-decoration:underline;text-underline-offset:3px}
+h1{font:800 30px/1.1 'Bricolage Grotesque',sans-serif;letter-spacing:-.01em;margin-top:4px}
+h2{font:600 21px 'Bricolage Grotesque',sans-serif;margin:22px 0 10px}
+.intro{margin-top:8px;font-size:15px;max-width:44ch}
+.cartao,.lista{background:#fff;border:2.5px solid var(--tinta);border-radius:20px;box-shadow:0 4px 0 var(--tinta)}
+.lista{padding:4px 14px}
+.ferr{display:grid;gap:14px;margin-top:18px}
+.ferr a,.ferr div{display:block;padding:14px 16px;color:inherit;text-decoration:none;background:#fff;border:2.5px solid var(--tinta);border-radius:20px;box-shadow:0 4px 0 var(--tinta)}
+.ferr a:hover{background:var(--sol)}
+.ferr b{display:block;font:800 19px 'Bricolage Grotesque',sans-serif}
+.ferr span{font-size:13.5px;color:var(--mudo)}
+.ferr .breve{box-shadow:none;background:transparent;border-style:dashed;opacity:.8}
+.tag{display:inline-block;margin-left:6px;padding:2px 10px;font:600 12px 'DM Sans',sans-serif;vertical-align:middle;background:var(--sol);border:2px solid var(--tinta);border-radius:999px}
+.voltar{display:inline-block;margin:16px 0 0 4px;font-weight:600;color:var(--tinta)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.seg button{padding:11px;font-weight:600;font-size:14px;background:#fff;border:2.5px solid var(--tinta);border-radius:14px;box-shadow:0 3px 0 var(--tinta);cursor:pointer}
+.seg button.on{background:var(--verde)}
+.prog{margin-top:16px;padding:12px 16px}
+.prog p{display:flex;justify-content:space-between;font:800 17px 'Bricolage Grotesque',sans-serif}
+.barra{height:12px;margin-top:8px;border:2.5px solid var(--tinta);border-radius:99px;background:#fff;overflow:hidden}
+.barra i{display:block;height:100%;width:0;background:var(--azul);transition:width .25s}
+.op{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1.5px solid var(--tinta);cursor:pointer}
+.op:last-child{border-bottom:0}
+.op input{flex:none;width:22px;height:22px;accent-color:var(--azul)}
+.op.ok span{text-decoration:line-through;color:var(--mudo)}
+.op button{margin-left:auto;width:30px;height:30px;font-size:18px;line-height:1;background:var(--sol);border:2px solid var(--tinta);border-radius:50%;cursor:pointer}
+.novo{display:flex;gap:10px;margin-top:22px}
+.novo input{flex:1;min-width:0;padding:11px 12px;font-size:16px;background:#fff;border:2px solid var(--tinta);border-radius:12px}
+.btn{padding:11px 18px;font:800 16px 'Bricolage Grotesque',sans-serif;background:var(--verde);border:2.5px solid var(--tinta);border-radius:999px;box-shadow:0 4px 0 var(--tinta);cursor:pointer}
+.acoes{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.acoes .btn{background:#fff}
+.dica{margin-top:20px;font:italic 400 15.5px/1.55 'Lora',Georgia,serif}
+.form-c{padding:14px;display:grid;gap:12px}
+.grade{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.campo{display:block;font-size:13px;font-weight:600}
+.campo input{display:block;width:100%;margin-top:5px;padding:11px 12px;font:400 16px 'DM Sans',sans-serif;background:#fff;border:2px solid var(--tinta);border-radius:12px}
+.campo small{display:block;margin-top:3px;font-weight:400;font-size:12.5px;line-height:1.4;color:var(--mudo)}
+.res{margin-top:20px;padding:16px;background:var(--sol);border:2.5px solid var(--tinta);border-radius:18px;box-shadow:0 4px 0 var(--tinta)}
+.res .rot{font-weight:600;font-size:13px}
+.res .preco{font:800 46px/1 'Bricolage Grotesque',sans-serif;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.res .lin{display:flex;justify-content:space-between;gap:12px;margin-top:8px;padding-top:8px;border-top:1.5px solid var(--tinta);font-size:14px}
+.res .lin b{font-variant-numeric:tabular-nums}
+.res .erro{font-weight:600}
+.prod{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1.5px solid var(--tinta)}
+.prod:last-child{border-bottom:0}
+.prod div{flex:1;min-width:0}.prod b{display:block;font:600 16px 'Bricolage Grotesque',sans-serif}.prod span{font-size:12.5px;color:var(--mudo)}
+.prod em{font:800 18px 'Bricolage Grotesque',sans-serif;font-style:normal}
+.prod button{width:30px;height:30px;font-size:18px;line-height:1;background:var(--sol);border:2px solid var(--tinta);border-radius:50%;cursor:pointer}
+.filtros{display:grid;gap:10px;margin-top:14px}
+.filtros input,.filtros select{width:100%;padding:11px 12px;font:400 16px 'DM Sans',sans-serif;background:#fff;border:2px solid var(--tinta);border-radius:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{padding:6px 12px;font:600 13px 'DM Sans',sans-serif;background:#fff;border:2px solid var(--tinta);border-radius:999px;cursor:pointer}
+.chips button.on{background:var(--verde)}
+.aviso{margin-top:14px;padding:10px 14px;font-size:13.5px;background:#fff;border:2px dashed var(--tinta);border-radius:14px}
+.cf{margin-top:14px;padding:14px 16px}
+.cf h3{font:800 19px 'Bricolage Grotesque',sans-serif}
+.cf .meta{margin-top:2px;font-size:13px;color:var(--mudo)}
+.cf dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin-top:10px;font-size:14px}
+.cf dt{font-weight:600}.cf dd{margin:0}
+.cf .obs{margin-top:10px;font:italic 400 15.5px/1.5 'Lora',Georgia,serif}
+.cf .btn{display:inline-block;margin-top:12px;padding:8px 16px;font-size:14px;color:inherit;text-decoration:none}
+a.btn{display:inline-block;text-decoration:none;color:inherit}
+[hidden]{display:none!important}
+@media print{body{background:#fff;max-width:none}.voltar,.seg,.novo,.acoes,.op button,.dica{display:none}.cartao,.lista{box-shadow:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<section id="v-inicio">
+  <header class="topo">
+    <p class="marca"><a href="https://instagram.com/unspredinhos" target="_blank" rel="noopener">Uns Predinhos</a></p>
+    <h1>Ferramentas Feiras</h1>
+  </header>
+  <nav class="ferr" aria-label="Ferramentas">
+    <a href="#checklist"><b>Checklist do que levar</b><span>Kits prontos para feira ao ar livre, coberta ou com chuva.</span></a>
+    <a href="#preco"><b>Calculadora de preço</b><span>Custo, tempo, margem e taxa da maquininha viram o preço de venda.</span></a>
+    <a href="#equilibrio"><b>Ponto de equilíbrio</b><span>Quantas peças vender para pagar a feira.</span></a>
+    <a href="#fornecedores"><b>Fornecedores</b><span>Gráficas, papéis e embalagens indicados por quem já usou.</span></a>
+    <div class="breve"><b>Diário de feiras <i class="tag">em breve</i></b><span>O que vendeu, o que deu errado e se vale voltar.</span></div>
+  </nav>
+</section>
+
+<section id="v-checklist" hidden>
+  <a class="voltar" href="#inicio">← Ferramentas</a>
+  <header class="topo">
+    <h1>Checklist do que levar</h1>
+    <p class="intro">Escolha o tipo de feira. Suas marcações ficam salvas neste aparelho.</p>
+  </header>
+  <div class="seg" id="presets" role="group" aria-label="Tipo de feira"></div>
+  <div class="cartao prog"><p><span id="prog-t">0 de 0</span><span id="prog-p">0%</span></p><div class="barra"><i id="prog-b"></i></div></div>
+  <div id="grupos"></div>
+  <form class="novo" id="form-novo">
+    <input id="novo-t" type="text" placeholder="Adicionar item seu" aria-label="Novo item">
+    <button class="btn" type="submit">Adicionar</button>
+  </form>
+  <div class="acoes">
+    <button class="btn" id="limpar" type="button">Desmarcar tudo</button>
+    <button class="btn" id="imprimir" type="button">Imprimir lista</button>
+  </div>
+  <p class="dica">Confira a lista na véspera, não na manhã da feira. O que falta ainda dá tempo de comprar.</p>
+</section>
+
+<section id="v-preco" hidden>
+  <a class="voltar" href="#inicio">← Ferramentas</a>
+  <header class="topo">
+    <h1>Calculadora de preço</h1>
+    <p class="intro">Preencha os custos de uma unidade. Os valores ficam salvos neste aparelho.</p>
+  </header>
+  <div class="cartao form-c">
+    <label class="campo">Produto<input id="p-nome" type="text" placeholder="Ex.: Postal A6"></label>
+    <div class="grade">
+      <label class="campo">Material (R$)<input id="p-mat" inputmode="decimal" placeholder="0,00"></label>
+      <label class="campo">Impressão ou produção (R$)<input id="p-imp" inputmode="decimal" placeholder="0,00"></label>
+      <label class="campo">Embalagem (R$)<input id="p-emb" inputmode="decimal" placeholder="0,00"></label>
+      <label class="campo">Tempo de trabalho (min)<input id="p-min" inputmode="decimal" placeholder="0"></label>
+    </div>
+    <label class="campo">Valor da sua hora (R$/h)<input id="p-hora" inputmode="decimal" placeholder="0,00"><small>Deixe vazio se não quiser contar o seu tempo no preço.</small></label>
+    <div class="grade">
+      <label class="campo">Margem desejada (%)<input id="p-mar" inputmode="decimal" value="40"></label>
+      <label class="campo">Taxa do cartão (%)<input id="p-tax" inputmode="decimal" value="4"></label>
+    </div>
+    <p class="campo"><small>A margem é a parte do preço que sobra como lucro, depois de descontar o custo e a taxa do cartão.</small></p>
+  </div>
+  <div class="res" aria-live="polite">
+    <p class="rot">Preço de venda sugerido</p>
+    <p class="preco" id="r-preco">R$ 0,00</p>
+    <p class="lin"><span>Custo por unidade</span><b id="r-custo">R$ 0,00</b></p>
+    <p class="lin"><span>Lucro no Pix</span><b id="r-pix">R$ 0,00</b></p>
+    <p class="lin"><span>Lucro no cartão</span><b id="r-cartao">R$ 0,00</b></p>
+    <p class="lin"><span>Cálculo exato, antes de arredondar</span><b id="r-exato">R$ 0,00</b></p>
+  </div>
+  <div class="acoes"><button class="btn" id="salvar-prod" type="button">Salvar na lista</button><button class="btn" id="limpar-prod" type="button">Limpar campos</button></div>
+  <div id="prod-bloco" hidden>
+    <h2>Meus produtos</h2>
+    <div class="lista" id="prod-lista"></div>
+  </div>
+  <p class="dica">O preço sugerido sobe para o próximo real inteiro, para facilitar o troco na banca.</p>
+</section>
+
+<section id="v-equilibrio" hidden>
+  <a class="voltar" href="#inicio">← Ferramentas</a>
+  <header class="topo">
+    <h1>Ponto de equilíbrio</h1>
+    <p class="intro">Quantas peças você precisa vender para pagar os custos da feira. Da peça seguinte em diante, o lucro é seu.</p>
+  </header>
+  <div class="cartao form-c">
+    <div class="grade">
+      <label class="campo">Inscrição (R$)<input id="e-ins" inputmode="decimal" placeholder="0,00"></label>
+      <label class="campo">Transporte (R$)<input id="e-tra" inputmode="decimal" placeholder="0,00"></label>
+      <label class="campo">Alimentação (R$)<input id="e-ali" inputmode="decimal" placeholder="0,00"></label>
+      <label class="campo">Outros custos (R$)<input id="e-out" inputmode="decimal" placeholder="0,00"></label>
+    </div>
+    <div class="grade">
+      <label class="campo">Horas de feira<input id="e-hor" inputmode="decimal" placeholder="Opcional"></label>
+      <label class="campo">Vendas no cartão (%)<input id="e-car" inputmode="decimal" value="50"></label>
+    </div>
+  </div>
+  <h2>O que você vende</h2>
+  <p id="eq-vazio" class="intro">Você ainda não salvou produtos. Salve na <a href="#preco">calculadora de preço</a> ou informe os valores médios abaixo.</p>
+  <div class="lista" id="eq-prods"></div>
+  <div class="cartao form-c" style="margin-top:14px">
+    <div class="grade">
+      <label class="campo">Preço médio por peça (R$)<input id="e-pm" inputmode="decimal" placeholder="0,00"></label>
+      <label class="campo">Lucro médio por peça (R$)<input id="e-lm" inputmode="decimal" placeholder="0,00"></label>
+    </div>
+    <p class="campo"><small>Estes dois campos só valem quando nenhum produto da lista está marcado.</small></p>
+  </div>
+  <div class="res" aria-live="polite">
+    <p class="rot">Para pagar a feira, venda</p>
+    <p class="preco" id="q-n">0 peças</p>
+    <p class="lin"><span>Custo total da feira</span><b id="q-custo">R$ 0,00</b></p>
+    <p class="lin"><span>Lucro médio por peça</span><b id="q-lucro">R$ 0,00</b></p>
+    <p class="lin"><span>Faturamento necessário</span><b id="q-fat">R$ 0,00</b></p>
+    <p class="lin"><span>Ritmo necessário</span><b id="q-ritmo">–</b></p>
+  </div>
+  <p class="dica">Se o número parecer alto para o tamanho da feira, vale rever o preço, o custo ou a decisão de ir.</p>
+</section>
+
+<section id="v-fornecedores" hidden>
+  <a class="voltar" href="#inicio">← Ferramentas</a>
+  <header class="topo">
+    <h1>Fornecedores</h1>
+    <p class="intro">Gráficas, papéis e embalagens indicados por quem vende em feiras. Confirme prazo e preço direto com o fornecedor.</p>
+  </header>
+  <div class="acoes" style="margin-top:12px"><a class="btn" id="f-form" href="#" target="_blank" rel="noopener" hidden>Indicar um fornecedor</a></div>
+  <div class="filtros">
+    <input id="f-busca" type="search" placeholder="Buscar por nome ou observação" aria-label="Buscar fornecedor">
+    <div class="chips" id="f-cats" role="group" aria-label="Categoria"></div>
+  </div>
+  <p class="aviso" id="f-aviso" hidden></p>
+  <div id="f-lista"></div>
+</section>
+
+<script>
+const PRESETS=[['kit','Kit básico'],['ar','Ao ar livre'],['cob','Feira coberta'],['chu','Dia de chuva']];
+const ITENS={
+'Pagamento':[['Maquininha carregada e carregador',''],['Troco em notas e moedas',''],['QR Code do Pix impresso',''],['Caderno ou planilha para anotar vendas','']],
+'Banca':[['Toalha ou tecido para a mesa',''],['Expositores e suportes',''],['Placas de preço',''],['Fita adesiva, tesoura e clipes',''],['Tenda ou barraca','ar chu'],['Pesos para firmar a tenda','ar chu'],['Iluminação portátil','cob'],['Extensão e benjamim','cob'],['Lona para cobrir a banca','chu']],
+'Produtos':[['Estoque conferido item por item',''],['Peças de reserva em caixa fechada',''],['Sacolas e papel de embrulho',''],['Plástico ou saquinhos para proteger as peças','ar chu'],['Capa impermeável para caixas e prints','chu']],
+'Divulgação':[['Cartões com contato e QR Code',''],['Lista para e-mail ou WhatsApp de clientes',''],['Cartaz com nome e @ da banca','']],
+'Conforto':[['Água e lanche',''],['Cadeira ou banquinho',''],['Protetor solar e chapéu','ar'],['Casaco e toalha para secar as mãos','chu']]
+};
+const $=s=>document.querySelector(s);
+let preset='kit',est={};
+const chave=()=>'feiras:chk:'+preset;
+function ler(){try{est=JSON.parse(localStorage.getItem(chave()))||{}}catch(e){est={}}est.ok=est.ok||{};est.extra=est.extra||[]}
+function salvar(){try{localStorage.setItem(chave(),JSON.stringify(est))}catch(e){}}
+function visivel(tags){return tags===''||tags.split(' ').includes(preset)}
+function linha(txt,extra,idx){
+  const l=document.createElement('label');l.className='op'+(est.ok[txt]?' ok':'');
+  const c=document.createElement('input');c.type='checkbox';c.checked=!!est.ok[txt];
+  c.onchange=()=>{est.ok[txt]=c.checked;salvar();desenhar()};
+  const s=document.createElement('span');s.textContent=txt;
+  l.append(c,s);
+  if(extra){const b=document.createElement('button');b.type='button';b.textContent='×';b.setAttribute('aria-label','Remover '+txt);
+    b.onclick=e=>{e.preventDefault();est.extra.splice(idx,1);delete est.ok[txt];salvar();desenhar()};l.append(b)}
+  return l;
+}
+function desenhar(){
+  const g=$('#grupos');g.textContent='';let total=0,feitos=0;
+  const conta=t=>{total++;if(est.ok[t])feitos++};
+  for(const [nome,its] of Object.entries(ITENS)){
+    const v=its.filter(i=>visivel(i[1]));
+    const h=document.createElement('h2');h.textContent=nome;
+    const d=document.createElement('div');d.className='lista';
+    v.forEach(i=>{conta(i[0]);d.append(linha(i[0],false))});
+    g.append(h,d);
+  }
+  if(est.extra.length){
+    const h=document.createElement('h2');h.textContent='Seus itens';
+    const d=document.createElement('div');d.className='lista';
+    est.extra.forEach((t,i)=>{conta(t);d.append(linha(t,true,i))});
+    g.append(h,d);
+  }
+  const p=total?Math.round(feitos/total*100):0;
+  $('#prog-t').textContent=feitos+' de '+total;$('#prog-p').textContent=p+'%';$('#prog-b').style.width=p+'%';
+}
+function botoes(){
+  const b=$('#presets');b.textContent='';
+  PRESETS.forEach(([k,n])=>{const x=document.createElement('button');x.type='button';x.textContent=n;x.className=k===preset?'on':'';x.setAttribute('aria-pressed',k===preset);
+    x.onclick=()=>{preset=k;try{localStorage.setItem('feiras:preset',k)}catch(e){}ler();botoes();desenhar()};b.append(x)});
+}
+$('#form-novo').onsubmit=e=>{e.preventDefault();const t=$('#novo-t').value.trim();if(!t)return;
+  if(!est.extra.includes(t))est.extra.push(t);$('#novo-t').value='';salvar();desenhar()};
+$('#limpar').onclick=()=>{est.ok={};salvar();desenhar()};
+$('#imprimir').onclick=()=>window.print();
+const VIEWS=['inicio','checklist','preco','equilibrio','fornecedores'];
+function mostrar(h){
+  const r=VIEWS.includes(h)?h:'inicio';
+  VIEWS.forEach(k=>$('#v-'+k).hidden=k!==r);
+  if(r==='equilibrio')eqLista();
+  if(r==='fornecedores'&&!fornOk)carregarForn();
+  window.scrollTo(0,0);
+}
+function rota(){mostrar(location.hash.slice(1))}
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]');if(!a)return;
+  e.preventDefault();const v=a.getAttribute('href').slice(1);mostrar(v);
+  try{history.replaceState(null,'','#'+v)}catch(err){}
+});
+try{preset=localStorage.getItem('feiras:preset')||'kit'}catch(e){}
+if(!PRESETS.some(p=>p[0]===preset))preset='kit';
+ler();botoes();desenhar();
+addEventListener('hashchange',rota);
+
+/* ── calculadora de preço ── */
+const CAMPOS=['nome','mat','imp','emb','min','hora','mar','tax'].map(k=>'p-'+k);
+const num=id=>{const v=parseFloat(String($('#'+id).value).replace(',','.'));return isFinite(v)&&v>0?v:0};
+const brl=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+let ult=null,prods=[];
+function calc(){
+  const custo=num('p-mat')+num('p-imp')+num('p-emb')+num('p-min')/60*num('p-hora');
+  const m=num('p-mar')/100,t=num('p-tax')/100;
+  ult=null;
+  if(m+t>=1){$('#r-preco').textContent='Margem alta demais';return zerar(custo)}
+  if(!custo){$('#r-preco').textContent='R$ 0,00';return zerar(0)}
+  const exato=custo/(1-m-t),preco=Math.ceil(exato-1e-9);
+  ult={custo,preco,pix:preco-custo,cartao:preco*(1-t)-custo};
+  $('#r-preco').textContent=brl(preco);$('#r-custo').textContent=brl(custo);
+  $('#r-pix').textContent=brl(ult.pix);$('#r-cartao').textContent=brl(ult.cartao);$('#r-exato').textContent=brl(exato);
+}
+function zerar(c){['pix','cartao','exato'].forEach(k=>$('#r-'+k).textContent=brl(0));$('#r-custo').textContent=brl(c)}
+function lerPreco(){try{const d=JSON.parse(localStorage.getItem('feiras:preco'));if(d)CAMPOS.forEach(id=>{if(d[id]!=null)$('#'+id).value=d[id]})}catch(e){}
+  try{prods=JSON.parse(localStorage.getItem('feiras:produtos'))||[]}catch(e){prods=[]}}
+function salvarPreco(){try{const d={};CAMPOS.forEach(id=>d[id]=$('#'+id).value);localStorage.setItem('feiras:preco',JSON.stringify(d))}catch(e){}}
+function salvarProds(){try{localStorage.setItem('feiras:produtos',JSON.stringify(prods))}catch(e){}}
+function listaProds(){
+  const l=$('#prod-lista');l.textContent='';$('#prod-bloco').hidden=!prods.length;
+  prods.forEach((p,i)=>{const d=document.createElement('div');d.className='prod';
+    d.innerHTML='<div><b></b><span></span></div><em></em><button type="button"></button>';
+    d.querySelector('b').textContent=p.n;d.querySelector('span').textContent='Custo '+brl(p.custo)+' · lucro no Pix '+brl(p.pix);
+    d.querySelector('em').textContent=brl(p.preco);
+    const b=d.querySelector('button');b.textContent='×';b.setAttribute('aria-label','Remover '+p.n);
+    b.onclick=()=>{prods.splice(i,1);salvarProds();listaProds()};l.append(d)});
+}
+CAMPOS.forEach(id=>$('#'+id).addEventListener('input',()=>{calc();salvarPreco()}));
+$('#salvar-prod').onclick=()=>{if(!ult)return;prods.push({n:$('#p-nome').value.trim()||'Produto',...ult});salvarProds();listaProds()};
+$('#limpar-prod').onclick=()=>{CAMPOS.forEach(id=>$('#'+id).value=id==='p-mar'?'40':id==='p-tax'?'4':'');calc();salvarPreco()};
+lerPreco();calc();listaProds();
+
+/* ── ponto de equilíbrio ── */
+const EQ=['ins','tra','ali','out','hor','car','pm','lm'].map(k=>'e-'+k);
+let off=[];
+const kp=p=>p.n+'|'+p.preco;
+function eqSalvar(){try{const d={off};EQ.forEach(id=>d[id]=$('#'+id).value);localStorage.setItem('feiras:equilibrio',JSON.stringify(d))}catch(e){}}
+function eqLer(){try{const d=JSON.parse(localStorage.getItem('feiras:equilibrio'));if(d){off=d.off||[];EQ.forEach(id=>{if(d[id]!=null)$('#'+id).value=d[id]})}}catch(e){}}
+function eqLista(){
+  const l=$('#eq-prods');l.textContent='';l.hidden=!prods.length;$('#eq-vazio').hidden=!!prods.length;
+  prods.forEach(p=>{const k=kp(p),r=document.createElement('label');r.className='op';
+    const c=document.createElement('input');c.type='checkbox';c.checked=!off.includes(k);
+    c.onchange=()=>{off=c.checked?off.filter(x=>x!==k):off.concat(k);eqSalvar();eqCalc()};
+    const s=document.createElement('span');s.textContent=p.n+' · '+brl(p.preco);r.append(c,s);l.append(r)});
+  eqCalc();
+}
+function eqCalc(){
+  const custo=['e-ins','e-tra','e-ali','e-out'].reduce((a,id)=>a+num(id),0);
+  const c=Math.min(num('e-car'),100)/100,sel=prods.filter(p=>!off.includes(kp(p)));
+  let pm,lm;
+  if(sel.length){pm=sel.reduce((a,p)=>a+p.preco,0)/sel.length;lm=sel.reduce((a,p)=>a+p.pix*(1-c)+p.cartao*c,0)/sel.length}
+  else{pm=num('e-pm');lm=num('e-lm')}
+  $('#q-custo').textContent=brl(custo);$('#q-lucro').textContent=brl(lm);
+  if(!custo||lm<=0){$('#q-n').textContent=custo?'–':'0 peças';$('#q-fat').textContent=brl(0);$('#q-ritmo').textContent='–';return}
+  const n=Math.ceil(custo/lm-1e-9),h=num('e-hor');
+  $('#q-n').textContent=n+(n===1?' peça':' peças');$('#q-fat').textContent=brl(n*pm);
+  $('#q-ritmo').textContent=h?'1 peça a cada '+Math.max(1,Math.round(h*60/n))+' min':'–';
+}
+EQ.forEach(id=>$('#'+id).addEventListener('input',()=>{eqCalc();eqSalvar()}));
+eqLer();eqLista();
+
+/* ── fornecedores (planilha publicada do Google Drive) ── */
+const FORN_CSV='';   // link "Publicar na web" da aba de respostas, formato CSV
+const FORN_FORM='';  // link do formulário para indicar fornecedores
+const ORDEM=['Impressão','Papel','Embalagem','Outras'];
+const DEMO=`Carimbo de data/hora,Nome do fornecedor,Categoria,Contato,Comentário,Aprovado
+1,Gráfica Exemplo,Impressão,https://exemplo.com,"Dado de exemplo: conecte a planilha para ver os fornecedores reais.",sim
+2,Papelaria Exemplo,Papel,@papelariaexemplo,Dado de exemplo.,sim
+3,Embalagens Exemplo,Embalagem,5551999990000,Dado de exemplo.,sim`;
+let forn=[],fornOk=false,fCat='';
+const norm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+function csv(t){const rows=[];let r=[],c='',q=false;
+  for(let i=0;i<t.length;i++){const ch=t[i];
+    if(q){if(ch==='"'){if(t[i+1]==='"'){c+='"';i++}else q=false}else c+=ch}
+    else if(ch==='"')q=true;
+    else if(ch===','){r.push(c);c=''}
+    else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&t[i+1]==='\n')i++;r.push(c);rows.push(r);r=[];c=''}
+    else c+=ch}
+  if(c!==''||r.length){r.push(c);rows.push(r)}return rows}
+function mapear(t){
+  const rows=csv(t);if(!rows.length)return[];
+  const h=rows[0].map(norm),ix=(...k)=>h.findIndex(x=>k.some(y=>x.includes(y)));
+  const m={n:ix('nome'),cat:ix('categ'),con:ix('contato','site','link','whatsapp','instagram'),ob:ix('coment','obs','dica'),ap:ix('aprov','publicar')};
+  const g=(r,k)=>m[k]>=0?String(r[m[k]]||'').trim():'';
+  return rows.slice(1).map(r=>({n:g(r,'n'),cat:g(r,'cat')||'Outras',con:g(r,'con'),ob:g(r,'ob'),ap:m.ap<0||/^(s|sim|ok|x|aprovad|publicar)/.test(norm(g(r,'ap')))}))
+    .filter(x=>x.n&&x.ap).sort((a,b)=>a.n.localeCompare(b.n,'pt-BR'));
+}
+function linkDe(c){
+  if(/^https?:\/\//i.test(c))return c;
+  if(/^@[\w.]+$/.test(c))return 'https://instagram.com/'+c.slice(1);
+  const d=c.replace(/\D/g,'');
+  if(/^[\d\s()+-]+$/.test(c)&&d.length>=10)return 'https://wa.me/'+(d.length<=11?'55'+d:d);
+  if(/^[\w.-]+\.[a-z]{2,}(\/\S*)?$/i.test(c))return 'https://'+c;
+  return '';
+}
+function aviso(t){const a=$('#f-aviso');a.hidden=!t;a.textContent=t||''}
+async function carregarForn(){
+  let txt='',av='';
+  if(!FORN_CSV){txt=DEMO;av='Planilha ainda não conectada. Estes são dados de exemplo.'}
+  else{
+    try{const r=await fetch(FORN_CSV);if(!r.ok)throw 0;txt=await r.text();
+      try{localStorage.setItem('feiras:forn',JSON.stringify({t:txt,d:Date.now()}))}catch(e){}}
+    catch(e){try{const c=JSON.parse(localStorage.getItem('feiras:forn'));if(c){txt=c.t;av='Sem conexão. Mostrando a lista salva em '+new Date(c.d).toLocaleDateString('pt-BR')+'.'}}catch(e2){}
+      if(!txt){forn=[];aviso('Não foi possível carregar a lista agora. Tente de novo com internet.');return desenharForn()}}
+  }
+  forn=mapear(txt);fornOk=true;aviso(av);desenharForn(true);
+}
+function desenharForn(refiltros){
+  const bu=norm($('#f-busca').value);
+  if(refiltros){
+    const pos=c=>{const i=ORDEM.indexOf(c);return i<0?99:i};
+    const cats=[...new Set(forn.map(x=>x.cat))].sort((a,b)=>pos(a)-pos(b)||a.localeCompare(b,'pt-BR'));
+    if(fCat&&!cats.includes(fCat))fCat='';
+    const box=$('#f-cats');box.textContent='';
+    ['',...cats].forEach(c=>{const b=document.createElement('button');b.type='button';b.textContent=c||'Todas';b.className=c===fCat?'on':'';b.setAttribute('aria-pressed',c===fCat);
+      b.onclick=()=>{fCat=c;desenharForn(true)};box.append(b)});
+  }
+  const L=$('#f-lista');L.textContent='';
+  const v=forn.filter(x=>(!fCat||x.cat===fCat)&&(!bu||norm(x.n+' '+x.ob).includes(bu)));
+  if(!v.length){const p=document.createElement('p');p.className='aviso';p.textContent=forn.length?'Nenhum fornecedor com esses filtros.':'Nenhum fornecedor na lista ainda.';L.append(p);return}
+  v.forEach(x=>{
+    const c=document.createElement('article');c.className='cartao cf';
+    const h=document.createElement('h3');h.textContent=x.n;c.append(h);
+    const m=document.createElement('p');m.className='meta';m.textContent=x.cat;c.append(m);
+    if(x.ob){const o=document.createElement('p');o.className='obs';o.textContent=x.ob;c.append(o)}
+    if(x.con){const u=linkDe(x.con);
+      if(u){const a=document.createElement('a');a.className='btn';a.href=u;a.target='_blank';a.rel='noopener';a.textContent='Abrir contato';c.append(a)}
+      else{const t=document.createElement('p');t.className='meta';t.style.marginTop='10px';t.textContent='Contato: '+x.con;c.append(t)}}
+    L.append(c)});
+}
+$('#f-busca').addEventListener('input',()=>desenharForn());
+if(FORN_FORM){const f=$('#f-form');f.href=FORN_FORM;f.hidden=false}
+rota();
+</script>
+</body>
+</html>
