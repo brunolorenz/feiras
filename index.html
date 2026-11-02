@@ -77,8 +77,12 @@ h2{font:600 21px 'Bricolage Grotesque',sans-serif;margin:22px 0 10px}
 .cf .obs{margin-top:10px;font:italic 400 15.5px/1.5 'Lora',Georgia,serif}
 .cf .btn{display:inline-block;margin-top:12px;padding:8px 16px;font-size:14px;color:inherit;text-decoration:none}
 a.btn{display:inline-block;text-decoration:none;color:inherit}
+.tag.ok{background:var(--verde)}
+.tag.ideia{background:#fff}
+.rod{margin-top:36px;text-align:center;font-size:14px;font-weight:600}
+.rod a{color:var(--tinta);text-decoration:underline;text-underline-offset:3px}
 [hidden]{display:none!important}
-@media print{body{background:#fff;max-width:none}.voltar,.seg,.novo,.acoes,.op button,.dica{display:none}.cartao,.lista{box-shadow:none}}
+@media print{.rod{display:none}body{background:#fff;max-width:none}.voltar,.seg,.novo,.acoes,.op button,.dica{display:none}.cartao,.lista{box-shadow:none}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -94,7 +98,6 @@ a.btn{display:inline-block;text-decoration:none;color:inherit}
     <a href="#preco"><b>Calculadora de preço</b><span>Custo, tempo, margem e taxa da maquininha viram o preço de venda.</span></a>
     <a href="#equilibrio"><b>Ponto de equilíbrio</b><span>Quantas peças vender para pagar a feira.</span></a>
     <a href="#fornecedores"><b>Fornecedores</b><span>Gráficas, papéis e embalagens indicados por quem já usou.</span></a>
-    <div class="breve"><b>Diário de feiras <i class="tag">em breve</i></b><span>O que vendeu, o que deu errado e se vale voltar.</span></div>
   </nav>
 </section>
 
@@ -127,12 +130,14 @@ a.btn{display:inline-block;text-decoration:none;color:inherit}
   <div class="cartao form-c">
     <label class="campo">Produto<input id="p-nome" type="text" placeholder="Ex.: Postal A6"></label>
     <div class="grade">
-      <label class="campo">Material (R$)<input id="p-mat" inputmode="decimal" placeholder="0,00"></label>
-      <label class="campo">Impressão ou produção (R$)<input id="p-imp" inputmode="decimal" placeholder="0,00"></label>
+      <label class="campo">Custo de produção (R$)<input id="p-prod" inputmode="decimal" placeholder="0,00"><small>Papel, tinta, impressão na gráfica: o gasto para fazer uma peça.</small></label>
       <label class="campo">Embalagem (R$)<input id="p-emb" inputmode="decimal" placeholder="0,00"></label>
-      <label class="campo">Tempo de trabalho (min)<input id="p-min" inputmode="decimal" placeholder="0"></label>
     </div>
-    <label class="campo">Valor da sua hora (R$/h)<input id="p-hora" inputmode="decimal" placeholder="0,00"><small>Deixe vazio se não quiser contar o seu tempo no preço.</small></label>
+    <div class="grade">
+      <label class="campo">Tempo de trabalho (min)<input id="p-min" inputmode="decimal" placeholder="0"></label>
+      <label class="campo">Valor da sua hora (R$/h)<input id="p-hora" inputmode="decimal" placeholder="0,00"></label>
+    </div>
+    <p class="campo"><small>Deixe o tempo ou a hora vazios se não quiser contar o seu trabalho no preço.</small></p>
     <div class="grade">
       <label class="campo">Margem desejada (%)<input id="p-mar" inputmode="decimal" value="40"></label>
       <label class="campo">Taxa do cartão (%)<input id="p-tax" inputmode="decimal" value="4"></label>
@@ -209,6 +214,52 @@ a.btn{display:inline-block;text-decoration:none;color:inherit}
   <div id="f-lista"></div>
 </section>
 
+<section id="v-roadmap" hidden>
+  <a class="voltar" href="#inicio">← Ferramentas</a>
+  <header class="topo">
+    <h1>Lista de Idéias para Desenvolver</h1>
+    <p class="intro">O que já está no ar, o que vem a seguir e as ideias em estudo.</p>
+  </header>
+  <h2>Preço e dinheiro</h2>
+  <div class="ferr">
+    <a href="#preco"><b>Calculadora de preço <i class="tag ok">no ar</i></b><span>Custo do material (papel, impressão, embalagem), tempo, margem desejada e taxa da feira ou maquininha resultam em preço sugerido. Cada pessoa preenche com os próprios números.</span></a>
+    <div class="breve"><b>Simulador de combos e descontos <i class="tag ideia">ideia</i></b><span>“Leve 3 pague 2”, kit de postais, e quanto isso muda a margem.</span></div>
+    <a href="#equilibrio"><b>Ponto de equilíbrio da feira <i class="tag ok">no ar</i></b><span>Taxa de inscrição + transporte + alimentação + material = quantas vendas para sair no zero a zero.</span></a>
+    <div class="breve"><b>Registro de vendas pós-feira <i class="tag ideia">ideia</i></b><span>O que vendeu, quanto, por faixa de preço. Alimenta as dicas de “o que funciona”.</span></div>
+  </div>
+  <h2>Preparação</h2>
+  <div class="ferr">
+    <a href="#checklist"><b>Checklist do que levar <i class="tag ok">no ar</i></b><span>Versões prontas (kit básico, barraca ao ar livre, feira coberta, feira com chuva) que cada pessoa pode adaptar. Itens típicos: troco, maquininha, Pix/QR Code, sacolas, fita, tesoura, toalha, iluminação, extensão, fichas de preço, cartões de contato.</span></a>
+    <div class="breve"><b>Checklist por fase <i class="tag ideia">ideia</i></b><span>30 dias antes (inscrição, produção), 1 semana antes (conferir estoque, carregar equipamentos), dia anterior, dia da feira, pós-feira.</span></div>
+    <div class="breve"><b>Planejador de estoque <i class="tag ideia">ideia</i></b><span>Quantidade a levar por produto com base em feiras anteriores.</span></div>
+    <div class="breve"><b>Guia de montagem da banca <i class="tag ideia">ideia</i></b><span>Fotos de bancas que funcionaram, alturas, iluminação, organização por faixa de preço.</span></div>
+  </div>
+  <h2>Aprendizados coletivos</h2>
+  <div class="ferr">
+    <div class="breve"><b>Diário de feira e mural de dicas <i class="tag">em breve</i></b><span>Formulário padronizado depois de cada feira: nome da feira, data, custo, público, faturamento, produtos que mais saíram, o que deu errado, nota geral. Com o tempo vira um banco de dados e um mural de dicas curtas e categorizadas (atendimento, vitrine, embalagem, divulgação, pagamento).</span></div>
+    <div class="breve"><b>Erros e perrengues <i class="tag ideia">ideia</i></b><span>Seção honesta do que não funcionou. Costuma ser a mais útil.</span></div>
+  </div>
+  <h2>Fornecedores e produção</h2>
+  <div class="ferr">
+    <a href="#fornecedores"><b>Diretório de fornecedores <i class="tag ok">no ar</i></b><span>Gráficas, papelarias e embalagens indicadas por quem já usou, com categoria, contato e comentário.</span></a>
+    <div class="breve"><b>Guia de papéis e acabamentos <i class="tag ideia">ideia</i></b><span>Gramaturas, quando usar cada uma, o que encarece.</span></div>
+    <div class="breve"><b>Orçamento coletivo <i class="tag ideia">ideia</i></b><span>Ferramenta para juntar pedidos e baratear tiragens.</span></div>
+  </div>
+  <h2>Divulgação e relacionamento</h2>
+  <div class="ferr">
+    <div class="breve"><b>Gerador de materiais <i class="tag ideia">ideia</i></b><span>Cartão de contato, placa de preço e QR Code (Pix, site, Instagram) prontos para imprimir.</span></div>
+    <div class="breve"><b>Modelos de textos <i class="tag ideia">ideia</i></b><span>Posts “vou estar na feira X”, mensagem para clientes, agradecimento.</span></div>
+    <div class="breve"><b>Agenda compartilhada de feiras <i class="tag ideia">ideia</i></b><span>Datas, prazos de inscrição, quem vai a qual.</span></div>
+  </div>
+  <h2>Organização do grupo</h2>
+  <div class="ferr">
+    <div class="breve"><b>Mural de caronas e divisão de custos <i class="tag ideia">ideia</i></b><span>Transporte, barracas compartilhadas, revezamento na banca.</span></div>
+    <div class="breve"><b>Perfil de cada artista <i class="tag ideia">ideia</i></b><span>Quem é, o que vende, link, para o site funcionar também como vitrine coletiva.</span></div>
+  </div>
+</section>
+
+<footer class="rod"><a href="#roadmap">Lista de Idéias para Desenvolver</a></footer>
+
 <script>
 const PRESETS=[['kit','Kit básico'],['ar','Ao ar livre'],['cob','Feira coberta'],['chu','Dia de chuva']];
 const ITENS={
@@ -262,7 +313,7 @@ $('#form-novo').onsubmit=e=>{e.preventDefault();const t=$('#novo-t').value.trim(
   if(!est.extra.includes(t))est.extra.push(t);$('#novo-t').value='';salvar();desenhar()};
 $('#limpar').onclick=()=>{est.ok={};salvar();desenhar()};
 $('#imprimir').onclick=()=>window.print();
-const VIEWS=['inicio','checklist','preco','equilibrio','fornecedores'];
+const VIEWS=['inicio','checklist','preco','equilibrio','fornecedores','roadmap'];
 function mostrar(h){
   const r=VIEWS.includes(h)?h:'inicio';
   VIEWS.forEach(k=>$('#v-'+k).hidden=k!==r);
@@ -282,12 +333,12 @@ ler();botoes();desenhar();
 addEventListener('hashchange',rota);
 
 /* ── calculadora de preço ── */
-const CAMPOS=['nome','mat','imp','emb','min','hora','mar','tax'].map(k=>'p-'+k);
+const CAMPOS=['nome','prod','emb','min','hora','mar','tax'].map(k=>'p-'+k);
 const num=id=>{const v=parseFloat(String($('#'+id).value).replace(',','.'));return isFinite(v)&&v>0?v:0};
 const brl=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 let ult=null,prods=[];
 function calc(){
-  const custo=num('p-mat')+num('p-imp')+num('p-emb')+num('p-min')/60*num('p-hora');
+  const custo=num('p-prod')+num('p-emb')+num('p-min')/60*num('p-hora');
   const m=num('p-mar')/100,t=num('p-tax')/100;
   ult=null;
   if(m+t>=1){$('#r-preco').textContent='Margem alta demais';return zerar(custo)}
